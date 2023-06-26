@@ -1,11 +1,11 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './routes';
+import { Register } from './view/register/Register';
 export const App=()=>{
 
   return <div>
 
-    <h1>Good Morning</h1>
+    <Register/>
    <Routes />
 
   </div>
