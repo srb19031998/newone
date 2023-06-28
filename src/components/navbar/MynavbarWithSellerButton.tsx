@@ -17,7 +17,7 @@ export const MynavbarWithSellerButton:React.FC=()=>{
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Online Shoping Site
           </Typography>
           <Button variant="contained" color="error"><Link to={"/pro/seller-upload"}> upload products</Link> </Button>
         </Toolbar>
