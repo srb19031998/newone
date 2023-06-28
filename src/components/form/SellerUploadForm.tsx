@@ -1,5 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { Formik } from "formik";
+import { sellerUpload } from "../../api/sellerUpload.api";
 
 export const SellerUploadForm:React.FC=()=>{
     return <>
@@ -13,6 +14,7 @@ export const SellerUploadForm:React.FC=()=>{
                 return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
+                sellerUpload(values.product_name,values.product_prise,values.product_image)
                 setTimeout(() => {
                     alert(JSON.stringify(values, null, 2));
                     // navigate('/pro/home')
@@ -20,7 +22,7 @@ export const SellerUploadForm:React.FC=()=>{
                 }, 400);
             }}
         >
-            {({ handleSubmit, handleChange, values }) => (
+            {({ handleSubmit, handleChange, values,setFieldValue }) => (
                
                     <form onSubmit={handleSubmit}>
                         <Grid
@@ -51,15 +53,19 @@ export const SellerUploadForm:React.FC=()=>{
                                 margin="normal"
                                 onChange={handleChange}
                             />
-                             <TextField
+                             <input
                                 id="outlined-basic"
-                                label="product name"
+                               
                                 name="product_image"
                                 type="file"
-                                value={values.product_image}
-                                variant="outlined"
-                                margin="normal"
-                                onChange={handleChange}
+                                value={undefined}
+                              
+                                
+                                onChange={(event) => {
+                                    let reader = new FileReader();
+                                 let files = event.target.files;
+                                    setFieldValue('product_image',files);
+                                    }}
                             />
                           
                             <Button type="submit"

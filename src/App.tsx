@@ -4,8 +4,7 @@ import { Register } from './view/register/Register';
 export const App=()=>{
 
   return <div>
-
-    <Register/>
+    
    <Routes />
 
   </div>
