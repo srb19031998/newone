@@ -1,22 +1,20 @@
 import { Button, Grid, TextField } from "@mui/material"
 import { Formik } from "formik"
-import { useNavigate } from 'react-router-dom'
-import { loginApi } from "../../api/login.api"
-import { isEmty } from "../../util/emtyArryCheck"
-export const MyLoginForm: React.FC = () => {
+import {useNavigate } from 'react-router-dom'
+export const MyLoginForm:React.FC=()=>{
     return <>
-
-        <LoginWrapper />
+  
+    <LoginWrapper/>
     </>
 }
 
 
 
 const LoginWrapper: React.FC = () => {
-    let navigate = useNavigate()
+    let navigate=useNavigate()
     return <>
         <Formik
-            initialValues={{ email: '', password: '', isseller: '' }}
+            initialValues={{ email: '', password: '',  isseller: '' }}
             validate={values => {
                 interface Ierrors {
                     email?: String
@@ -31,73 +29,64 @@ const LoginWrapper: React.FC = () => {
                 }
                 return errors;
             }}
-            onSubmit={async (values, { setSubmitting }) => {
-                let user = loginApi(values.email, values.password)
-
-                if (isEmty(await user) == false) {
-                    let data = await user
-                    console.log(JSON.stringify(data[0]))
-                    if (data != undefined) {
-                        window.localStorage.setItem('userInfo', JSON.stringify(data[0]))
-                        navigate('/pro/home')
-                    }
-
-
-
-                }
-            }
-            }
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2));
+                    navigate('/pro/home')
+                    setSubmitting(false);
+                }, 400);
+            }}
         >
             {({ handleSubmit, handleChange, values }) => (
+               
+                    <form onSubmit={handleSubmit}>
+                        <Grid
+                            container
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <h1>Login form</h1>
+                            
+                            <TextField
+                                id="outlined-basic"
+                                label="email"
+                                name="email"
+                                type="email"
+                                value={values.email}
+                                variant="outlined"
+                                margin="normal"
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="password"
+                                name="password"
+                                type="password"
+                                value={values.password}
+                                variant="outlined"
+                                margin="normal"
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="are u a seller"
+                                name="isseller"
+                                type="text"
+                                value={values.isseller}
+                                variant="outlined"
+                                margin="normal"
+                                onChange={handleChange}
+                            />
+                            <Button type="submit"
+                                variant="contained"
+                                color="success">
+                                login
+                            </Button>
+                        </Grid>
+                    </form>
 
-                <form onSubmit={handleSubmit}>
-                    <Grid
-                        container
-                        direction="column"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <h1>Login form</h1>
-
-                        <TextField
-                            id="outlined-basic"
-                            label="email"
-                            name="email"
-                            type="email"
-                            value={values.email}
-                            variant="outlined"
-                            margin="normal"
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            id="outlined-basic"
-                            label="password"
-                            name="password"
-                            type="password"
-                            value={values.password}
-                            variant="outlined"
-                            margin="normal"
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            id="outlined-basic"
-                            label="are u a seller"
-                            name="isseller"
-                            type="text"
-                            value={values.isseller}
-                            variant="outlined"
-                            margin="normal"
-                            onChange={handleChange}
-                        />
-                        <Button type="submit"
-                            variant="contained"
-                            color="success">
-                            login
-                        </Button>
-                    </Grid>
-                </form>
-
-
+               
             )}
         </Formik>
 
