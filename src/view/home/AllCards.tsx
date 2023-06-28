@@ -8,7 +8,12 @@ export const AllCards:React.FC=()=>{
     let [pro,setPro]=useState<any>()
 
     let {data,err,loading}=useFetch('https://fakestoreapi.com/products')
-
+useEffect(()=>{
+    (async()=>{
+        setPro(await allproductsApi())
+    
+    })()
+},[])
 
     console.log(data)
 return <>
@@ -19,7 +24,7 @@ return <>
   alignItems="center"
 >
 {
-  data?.map((s:any)=>{
+  pro?.map((s:any)=>{
     return <MyCards imge={s.image}/>
         })
 }
