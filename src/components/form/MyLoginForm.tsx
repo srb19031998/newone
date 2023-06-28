@@ -33,20 +33,20 @@ const LoginWrapper: React.FC = () => {
             }}
             onSubmit={async (values, { setSubmitting }) => {
                 let user = loginApi(values.email, values.password)
-            
+
                 if (isEmty(await user) == false) {
-                    let data=await user
-                    console.log( JSON.stringify(data[0]))
-if(data != undefined){
-    window.localStorage.setItem('userInfo', JSON.stringify(data[0]))
-    navigate('/pro/home')
-}
-                        
-                    
+                    let data = await user
+                    console.log(JSON.stringify(data[0]))
+                    if (data != undefined) {
+                        window.localStorage.setItem('userInfo', JSON.stringify(data[0]))
+                        navigate('/pro/home')
+                    }
+
+
 
                 }
             }
-        }
+            }
         >
             {({ handleSubmit, handleChange, values }) => (
 
